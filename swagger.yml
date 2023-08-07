@@ -181,23 +181,24 @@ paths:
                 id: 1
                 message: Meal plan created
     /weekly:
-      summary: Get your weekly meals list
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                recipes:
-                  - id: 1
-                    name: Spaghetti Bolognese
-                    ingredients:
-                      - pasta
-                      - ground beef
-                      - tomatoes
-                    instructions: |
-                      1. Cook pasta
-                      2. Brown ground beef
-                      3. Add tomatoes and simmer
-                    prep_time: 15
-                    cooking_time: 30
+      get:
+        summary: Get your weekly meals list
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                example:
+                  recipes:
+                    - id: 1
+                      name: Spaghetti Bolognese
+                      ingredients:
+                        - pasta
+                        - ground beef
+                        - tomatoes
+                      instructions: |
+                        1. Cook pasta
+                        2. Brown ground beef
+                        3. Add tomatoes and simmer
+                      prep_time: 15
+                      cooking_time: 30
