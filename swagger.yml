@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: Recipe and Meal Planning API
+  version: 1.0.0
+  description: An API for managing recipes and meal planning.
+
+paths:
+  /recipes:
+    get:
+      summary: Retrieve a list of all recipes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                recipes:
+                  - id: 1
+                    name: Spaghetti Bolognese
+                    ingredients:
+                      - pasta
+                      - ground beef
+                      - tomatoes
+                    instructions: |
+                      1. Cook pasta
+                      2. Brown ground beef
+                      3. Add tomatoes and simmer
+                    prep_time: 15
+                    cooking_time: 30
+
+    post:
+      summary: Create a new recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ingredients:
+                  type: array
+                  items:
+                    type: string
+                instructions:
+                  type: string
+                prep_time:
+                  type: integer
+                cooking_time:
+                  type: integer
+              required:
+                - name
+                - ingredients
+                - instructions
+                - prep_time
+                - cooking_time
+      responses:
+        '201':
+          description: Recipe created successfully
+          content:
+            application/json:
+              example:
+                id: 2
+                message: Recipe created
+
+  /recipes/{recipeId}:
+    get:
+      summary: Retrieve a specific recipe by ID
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                name: Spaghetti Bolognese
+                ingredients:
+                  - pasta
+                  - ground beef
+                  - tomatoes
+                instructions: |
+                  1. Cook pasta
+                  2. Brown ground beef
+                  3. Add tomatoes and simmer
+                prep_time: 15
+                cooking_time: 30
+
+    put:
+      summary: Update a specific recipe by ID
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ingredients:
+                  type: array
+                  items:
+                    type: string
+                instructions:
+                  type: string
+                prep_time:
+                  type: integer
+                cooking_time:
+                  type: integer
+              required:
+                - name
+                - ingredients
+                - instructions
+                - prep_time
+                - cooking_time
+      responses:
+        '200':
+          description: Recipe updated successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                message: Recipe updated
+
+    delete:
+      summary: Delete a specific recipe by ID
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Recipe deleted successfully
+
+  /meal-plans:
+    post:
+      summary: Create a new meal plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                meals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      recipe_id:
+                        type: integer
+                      meal_type:
+                        type: string
+                        enum: [breakfast, lunch, dinner]
+              required:
+                - date
+                - meals
+      responses:
+        '201':
+          description: Meal plan created successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                message: Meal plan created
