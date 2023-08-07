@@ -180,8 +180,8 @@ paths:
               example:
                 id: 1
                 message: Meal plan created
-    get:
-      summary: Retrieve a list of all recipes
+    /weekly:
+      summary: Get your weekly meals list
       responses:
         '200':
           description: Successful response
