@@ -107,3 +107,10 @@ paths:
               example:
                 id: 1
                 message: Vote recorded
+        '403':
+          description: Not allowed to vote on this issue
+          content:
+            application/json:
+              example:
+                id: 1
+                message: You are not allowed to cast this vote
