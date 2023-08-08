@@ -9,20 +9,20 @@ paths:
     get:
       summary: Retrieve a list of all polls
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               example:
                 polls:
                   - id: 1
-                    question: 'Favorite Programming Language?'
+                    question: "Favorite Programming Language?"
                     options:
                       - option_id: 1
-                        text: 'Python'
+                        text: "Python"
                         votes: 10
                       - option_id: 2
-                        text: 'JavaScript'
+                        text: "JavaScript"
                         votes: 15
 
     post:
@@ -47,7 +47,7 @@ paths:
                 - question
                 - options
       responses:
-        '201':
+        "201":
           description: Poll created successfully
           content:
             application/json:
@@ -65,19 +65,19 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               example:
                 id: 1
-                question: 'Favorite Programming Language?'
+                question: "Favorite Programming Language?"
                 options:
                   - option_id: 1
-                    text: 'Python'
+                    text: "Python"
                     votes: 10
                   - option_id: 2
-                    text: 'JavaScript'
+                    text: "JavaScript"
                     votes: 15
 
     post:
@@ -100,17 +100,36 @@ paths:
               required:
                 - option_id
       responses:
-        '201':
+        "201":
           description: Vote recorded successfully
           content:
             application/json:
               example:
                 id: 1
                 message: Vote recorded
-        '403':
+        "403":
           description: Not allowed to vote on this issue
           content:
             application/json:
               example:
                 id: 1
                 message: You are not allowed to cast this vote
+    delete:
+      summary: Delete a specific poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                option_id:
+                  type: integer
+              required:
+                - option_id
